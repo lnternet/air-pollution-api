@@ -3,8 +3,9 @@
   "main": "index.js",
   "scripts": {
     "start-gateway": "node gateway.js",
-    "start-nasa-api": "node ./NASA_API/api.js",
-    "start": "run-p start-nasa-api start-gateway",
+    "start-ground-station-api": "node ./ground-station_API/api.js",
+    "start-aod-api": "node ./AOD_API/api.js",
+    "start": "run-p start-ground-station-api start-aod-api start-gateway",
     "postinstall": "lerna bootstrap"
   },
   "dependencies": {

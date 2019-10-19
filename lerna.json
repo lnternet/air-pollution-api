@@ -1,4 +1,4 @@
 {
-    "packages": ["NASA_API/"],
+    "packages": ["AOD_API/", "ground-station_API/"],
     "version": "independent"
 }

@@ -4,7 +4,8 @@ const { ApolloGateway } = require("@apollo/gateway");
 // Define list of APIs that will be joined:
 const gateway = new ApolloGateway({
     serviceList: [
-      { name: "NASA_API", url: "http://localhost:4001/graphql" }
+      { name: "ground-station_API", url: "http://localhost:4001/graphql" },
+      { name: "AOD_API", url: "http://localhost:4002/graphql" },
     ]
   });
 
