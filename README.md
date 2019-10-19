@@ -33,3 +33,19 @@ For Space Apps Challenge
 	}
 }
 ```
+
+```
+{
+  getMeasurement(lat: 54.8985, long: 23.9036) {
+    groundStation {
+      name,
+      aqi
+    },
+    biggestPollutant,
+    measurements {
+      type,
+      value
+    }
+  }
+}
+```

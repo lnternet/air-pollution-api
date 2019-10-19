@@ -5,7 +5,7 @@ const { ApolloGateway } = require("@apollo/gateway");
 const gateway = new ApolloGateway({
     serviceList: [
       { name: "ground-station_API", url: "http://localhost:4001/graphql" },
-      { name: "AOD_API", url: "http://localhost:4002/graphql" },
+      { name: "AOD_API", url: "http://localhost:4002/graphql" }
     ]
   });
 
@@ -20,4 +20,4 @@ async function startup() {
 }
 
 // * When starting all projects in parallel with one CLI command delay the startup of gateway a bit:
-setTimeout(startup, 10000);
+setTimeout(startup, 7000);

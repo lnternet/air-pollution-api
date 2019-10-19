@@ -33,10 +33,10 @@ const typeDefs = gql`
   }
 
   type Measurement {
-      type: String
-      value: Float
-      yellowZone: Float
-      redZone: Float
+    type: String
+    value: Float
+    yellowZone: Float
+    redZone: Float
   }
 `;
 
