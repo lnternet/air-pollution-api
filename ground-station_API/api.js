@@ -44,23 +44,13 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         getStations: async (_, args) => {
-            const r = await requestStationsFromOpenAPI(args.minLat, args.minLong, args.maxLat, args.maxLong);
-            if (r.status == 'ok') {
-                let mappedResponse = [];
-                r.data.forEach(el => {
-                    mappedResponse.push({
-                        latitude: el.lat,
-                        longitude: el.lon,
-                        uid: el.uid,
-                        aqi: el.aqi,
-                        name: el.station.name,
-                        time: el.station.time
-                    });
-                });
-                return mappedResponse;
-            }
-            
-            return null;
+            const groundStations = await requestStationsFromOpenAPI(args.minLat, args.minLong, args.maxLat, args.maxLong);
+            const iots = requestIoTs(args.minLat, args.minLong, args.maxLat, args.maxLong);
+
+            let response = [];
+            response = response.concat(groundStations);
+            response = response.concat(iots);
+            return response;
         },
         getMeasurement: async (_, args) => {
             const r = await requestMeasurementsFromOpenAPI(args.lat, args.long);
@@ -112,12 +102,36 @@ async function requestStationsFromOpenAPI(minLat, minLong, maxLat, maxLong) {
             let data = '';
             resp.on('data', (chunk) => { data += chunk; });
             resp.on('end', () => {
-                resolve(JSON.parse(data));
+                const response = JSON.parse(data);
+
+                let mappedResponse = [];
+                response.data.forEach(el => {
+                    mappedResponse.push({
+                        latitude: el.lat,
+                        longitude: el.lon,
+                        uid: el.uid,
+                        aqi: el.aqi,
+                        name: el.station.name,
+                        time: el.station.time
+                    });
+                });
+
+                resolve(mappedResponse);
             });
         }).on("error", (err) => { 
             console.log(err);
             reject(); });
     });
+}
+
+async function requestIoTs(minLat, minLong, maxLat, maxLong) {
+    // Return fake home sensor
+    return {
+        latitude: 55.626,
+        longitude: 23.016,
+        aqi: 12,
+        name: 'My home sensor'
+    };
 }
 
 async function requestMeasurementsFromOpenAPI(lat, long) {

@@ -3,10 +3,10 @@ For Space Apps Challenge
 
 ```
 {
-  getLatest(lat: 10, long: 10) {
+  getLatest(lat: 33.831, long: -117.939) {
     latitude,
     longitude,
-    aod1
+    aod
   }
 }
 ```

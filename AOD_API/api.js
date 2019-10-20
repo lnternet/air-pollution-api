@@ -49,7 +49,7 @@ async function loadAllFiles() {
 async function loadData(path) {
     return await csv({
         noheader: true, 
-        headers: ['year','month','day','longitude','latitude','aod1','aod3','std3']
+        headers: ['year','month','day','longitude','latitude','aod','aod3','std3']
     }).fromFile(path);
 }
 
@@ -84,9 +84,7 @@ const typeDefs = gql`
   type AOD_Measurement {
     latitude: Float
     longitude: Float
-    aod1: Float
-    aod3: Float
-    std3: Float
+    aod: Float
   }
 `;
 
