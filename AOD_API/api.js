@@ -62,13 +62,13 @@ function getLatest() {
 }
 
 function getHistorical(lat, long, n) {
-    let result = [];
+    let result;
     data.forEach(d => {
         if (d[0].latitude == lat && d[0].longitude == long) {
             let arr = [];
             for(let i = 0; i < n; i++)
                 arr.push(d[d.length-(n-i)]);
-            result.push(arr)
+            result = arr
         }
     });
     return result;
@@ -78,7 +78,7 @@ function getHistorical(lat, long, n) {
 const typeDefs = gql`
   extend type Query {
     getLatest(lat: Float!, long: Float!) : [AOD_Measurement]
-    getHistorical(lat: Float!, long: Float!, n: Int!) : [ [ AOD_Measurement ] ]
+    getHistorical(lat: Float!, long: Float!, n: Int!) : [ AOD_Measurement ]
   }
 
   type AOD_Measurement {
